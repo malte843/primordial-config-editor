@@ -1,0 +1,9 @@
+{
+  "name": "primordial-skins-switch",
+  "version": "1.0.0",
+  "description": "move skins from one primordial config to another",
+  "main": "index.js",
+  "repository": "https://github.com/malte843/primordial-skins-switch.git",
+  "author": "cxr",
+  "license": "MIT"
+}
