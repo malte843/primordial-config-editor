@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Reader</title>
+    <style>
+        body {
+            font-family: 'Segoe UI',Sans-Serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+        }
+
+        label {
+            display: block;
+            margin: 10px auto;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #c19aa4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c19aa4;
+        }
+    </style>
+</head>
+
+<body>
+
+    <label for="fileInput1">Choose the Config to take the Skins from:</label>
+    <input type="file" id="fileInput1">
+
+    <label for="fileInput2">Choose the Config to put the Skins into:</label>
+    <input type="file" id="fileInput2">
+    <button onclick="processFiles()">Download</button>
+
+    <script>
+        function download(filename, text) {
+            const element = document.createElement('a');
+            element.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(text);
+            element.download = filename;
+            element.style.display = 'none';
+
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function processFiles() {
+            const fileInput1 = document.getElementById('fileInput1');
+            const fileInput2 = document.getElementById('fileInput2');
+
+            const reader1 = new FileReader();
+            const reader2 = new FileReader();
+
+            reader1.onload = function () {
+                const data1 = reader1.result;
+                const config1 = JSON.parse(atob(data1));
+
+                reader2.onload = function () {
+                    const data2 = reader2.result;
+                    const config2 = JSON.parse(atob(data2));
+
+                    config2.skins = config1.skins;
+
+                    const outputData = btoa(JSON.stringify(config2));
+
+                    console.log('Added all skins from config1.txt to config2.txt');
+                    download('output.txt', outputData);
+                };
+
+                reader2.readAsText(fileInput2.files[0]);
+            };
+
+            reader1.readAsText(fileInput1.files[0]);
+        }
+    </script>
+
+</body>
+
+</html>
