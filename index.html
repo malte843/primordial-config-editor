@@ -87,7 +87,7 @@
                     const outputData = btoa(JSON.stringify(config2));
 
                     console.log('Added all skins from config1.txt to config2.txt');
-                    download('output.txt', outputData);
+                    download(fileInput2.files[0].name, outputData);
                 };
 
                 reader2.readAsText(fileInput2.files[0]);
