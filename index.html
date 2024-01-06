@@ -4,99 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>prim skins</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Sans-Serif;
-            margin: 20px;
-            text-align: center;
-            background-color: #1d1d1d;
-            color: #ffffff;
-        }
-
-        input[type="file"] {
-            display: block;
-            margin: 10px auto;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 60%; /* Reduzierte Breite auf 60% */
-            box-sizing: border-box;
-        }
-
-        label {
-            display: block;
-            margin: 10px auto;
-            font-size: 1.2em;
-            color: #ffffff;
-        }
-
-        button {
-            padding: 10px;
-            background-color: #c19aa4;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #a8707e;
-        }
-    </style>
+    <title>prim config editor</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <label for="fileInput1">Choose the Config to take the Skins from:</label>
-    <input type="file" id="fileInput1">
+    <div class="wrapper">
+        <div class="file-div">
+            <label for="fileInput1">Choose the Config to take the Settings from:</label>
+            <input type="file" id="fileInput1">
 
-    <label for="fileInput2">Choose the Config to put the Skins into:</label>
-    <input type="file" id="fileInput2">
-    <button onclick="processFiles()">Download</button>
+            <label for="fileInput2">Choose the Config to put the Settings into:</label>
+            <input type="file" id="fileInput2">
+        </div>
 
-    <script>
-        function download(filename, text) {
-            const element = document.createElement('a');
-            element.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(text);
-            element.download = filename;
-            element.style.display = 'none';
+        <div class="selection-div">
+            <label><input type="checkbox" id="selection-rage" />Copy Rage</label>
+            <label><input type="checkbox" id="selection-legit" />Copy Legit</label>
+            <label><input type="checkbox" id="selection-visuals" />Copy Visuals</label>
+            <label><input type="checkbox" id="selection-misc" />Copy Misc</label>
+            <label><input type="checkbox" id="selection-skins" />Copy Skins</label>
+            <label><input type="checkbox" id="selection_scripts" disabled="true" />Copy Scripts</label>
+        </div>
+        <button onclick="processFiles()">Download</button>
+    </div>
 
-            document.body.appendChild(element);
-            element.click();
-            document.body.removeChild(element);
-        }
-
-        function processFiles() {
-            const fileInput1 = document.getElementById('fileInput1');
-            const fileInput2 = document.getElementById('fileInput2');
-
-            const reader1 = new FileReader();
-            const reader2 = new FileReader();
-
-            reader1.onload = function () {
-                const data1 = reader1.result;
-                const config1 = JSON.parse(atob(data1));
-
-                reader2.onload = function () {
-                    const data2 = reader2.result;
-                    const config2 = JSON.parse(atob(data2));
-
-                    config2.skins = config1.skins;
-
-                    const outputData = btoa(JSON.stringify(config2));
-
-                    console.log('Added all skins from config1.txt to config2.txt');
-                    download(fileInput2.files[0].name, outputData);
-                };
-
-                reader2.readAsText(fileInput2.files[0]);
-            };
-
-            reader1.readAsText(fileInput1.files[0]);
-        }
-    </script>
-
+    <script src="script.js"></script>
 </body>
 
 </html>

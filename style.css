@@ -1,0 +1,70 @@
+body {
+    font-family: 'Segoe UI', Sans-Serif;
+    margin: 20px;
+    text-align: center;
+    background-color: #1d1d1d;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Set the body height to 100% of the viewport height */
+}
+
+.wrapper {
+    text-align: center;
+    width: 60%;
+    position: relative;
+}
+
+.file-div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.selection-div {
+    margin-left: 20%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.selection-div label {
+    margin-bottom: 5px;
+}
+
+.selection-div input {
+    margin-right: 5px;
+}
+
+input[type="file"] {
+    display: block;
+    margin: 10px auto;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    margin: 10px auto;
+    font-size: 1.2em;
+    color: #ffffff;
+}
+
+button {
+    position: relative;
+    padding: 8px;
+    top: 30px;
+    /* Adjusted button padding */
+    background-color: #c19aa4;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 40%;
+    /* Moved button a bit down */
+}
+
+button:hover {
+    background-color: #a8707e;
+}
